@@ -58,6 +58,7 @@
             @endforelse
         </tbody>
     </table>
+    {{ $documents }}
 </div>
 <div class="d-grid gap-2 d-md-block mt-0 m-5">
     <a href="{{ route('document.create') }}" class="btn btn-secondary">Télécharger un document</a>

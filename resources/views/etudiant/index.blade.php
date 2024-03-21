@@ -45,5 +45,6 @@
             @endforelse
             </tbody>
         </table>
+        {{ $etudiants }}
     </div>
 @endsection

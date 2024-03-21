@@ -33,7 +33,7 @@
     </div>
   <div class="col-5">
     <label for="email" class="form-label">@lang('Email')</label>
-    <input type="email" name="email" class="form-control" id="email" placeholder="marie@gmail.com">
+    <input type="email" name="email" class="form-control" id="email" placeholder="marie@gmail.com" value="{{ old('email') }}">
     @if($errors->has('email'))
       <div class="text-danger mt-2">
           {{ $errors->first('email') }}
@@ -41,8 +41,8 @@
     @endif
   </div>
   <div class="col-5">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="password">
+    <label for="password" class="form-label">@lang('Password')</label>
+    <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}">
     @if($errors->has('password'))
       <div class="text-danger mt-2">
           {{ $errors->first('password') }}
@@ -61,16 +61,16 @@
   <div class="col-5">
     <label for="ville_nom" class="form-label">@lang('City')</label>
     <select name="ville_id" id="ville_nom" class="form-control">
-        <option value="0">Sélectionnez une ville</option>
+        <option>Sélectionnez une ville</option>
         @foreach($villes as $ville)
         <option value="{{ $ville->id }}" {{ old('ville_id') == $ville->id ? 'selected' : '' }}>{{ $ville->nom }}</option>
         @endforeach
+        @if($errors->has('ville_id'))
+            <div class="text-danger mt-2">
+                {{ $errors->first('ville_id') }}
+            </div>
+        @endif
     </select>
-    @if($errors->has('ville_id'))
-      <div class="text-danger mt-2">
-        {{ $errors->first('ville_id') }}
-      </div>
-    @endif
   </div>
   <div class="col-10">
     <button type="submit" class="btn btn-primary">@lang('Add')</button>

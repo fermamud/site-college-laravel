@@ -16,7 +16,12 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $documents = Document::all();
+        // $documents = Document::all();
+        // return view('document.index', compact('documents'));
+
+        $documents = Document::select()
+                    ->orderBy('nom')
+                    ->paginate(5);
         return view('document.index', compact('documents'));
     }
 

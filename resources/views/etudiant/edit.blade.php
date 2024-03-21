@@ -7,7 +7,7 @@
     @method('put')
     <div class="col-5">
       <label for="nom" class="form-label">@lang('Name')</label>
-      <input type="text" name="nom" class="form-control" id="nom" value="{{ old('nom', $etudiant->nom) }}">
+      <input type="text" name="nom" class="form-control" id="nom" value="{{ old('nom', $etudiant->user->nom) }}">
       @if($errors->has('nom'))
         <div class="text-danger mt-2">
             {{ $errors->first('nom') }}
@@ -34,7 +34,7 @@
     </div>
   <div class="col-md-5">
     <label for="email" class="form-label">@lang('Email')</label>
-    <input type="email" name="email" class="form-control" id="email" value="{{ old('email', $etudiant->email) }}">
+    <input type="email" name="email" class="form-control" id="email" value="{{ old('email', $etudiant->user->email) }}">
     @if($errors->has('email'))
       <div class="text-danger mt-2">
           {{ $errors->first('email') }}
@@ -50,13 +50,6 @@
       </div>
     @endif
   </div>
-  <!-- <div class="col-md-4">
-    <label for="ville_id" class="form-label">Ville Id</label>
-    <input type="number" name="ville_id" class="form-control" id="ville_id" value="{{ $etudiant->ville_id }}">
-  </div> -->
-
-  <!-- FALTA AQUI INCLUIR O OLD -->
-
   <div class="col-md-5">
     <label for="ville_nom" class="form-label">@lang('City')</label>
     <select name="ville_id" id="ville_nom" class="form-control">

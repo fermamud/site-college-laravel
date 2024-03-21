@@ -19,9 +19,12 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        // $users = User::all();
-        $etudiants = Etudiant::all();
-        // return view('etudiant.index', ['etudiants' => $etudiants, 'users' => $users]);
+        // $etudiants = Etudiant::all();
+        // return view('etudiant.index', ['etudiants' => $etudiants]);
+
+        $etudiants = Etudiant::select()
+                    ->orderBy('id')
+                    ->paginate(50);
         return view('etudiant.index', ['etudiants' => $etudiants]);
     }
 
@@ -51,28 +54,22 @@ class EtudiantController extends Controller
             'telephone' => 'required|max:191',
             'email' => 'required|max:191|unique:users,email',
             'date_naissance' => 'required|date',
-            'ville_id' => 'required|integer',
+            'ville_id' => 'required|integer|nullable',
             'password' => 'required|min:6|max:20'
         ]);
     
         $password = Hash::make($request->password);
         $user = User::create([
             'nom' => $request->nom,
-            // 'adresse' => $request->adresse,
-            // 'telephone' => $request->telephone,
             'email' => $request->email,
-            // 'date_naissance' => $request->date_naissance,
-            // 'ville_id' => $request->ville_id,
             'password' => $password
         ]);
         
         $id = $user->id;
         $etudiant = Etudiant::create([
             'id' => $id,
-            // 'nom' => $request->nom,
             'adresse' => $request->adresse,
             'telephone' => $request->telephone,
-            // 'email' => $request->email,
             'date_naissance' => $request->date_naissance,
             'ville_id' => $request->ville_id,
         ]);
@@ -99,9 +96,10 @@ class EtudiantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Etudiant $etudiant)
-    {   
+    {
+        $users = User::all();   
         $villes = Ville::all();
-        return view('etudiant.edit', ['etudiant' => $etudiant, 'villes' => $villes]);
+        return view('etudiant.edit', ['etudiant' => $etudiant, 'villes' => $villes, 'users' => $users]);
     }
 
     /**
@@ -121,25 +119,19 @@ class EtudiantController extends Controller
             'nom' => 'required|max:191',
             'adresse' => 'required|string',
             'telephone' => 'required|max:191',
-            'email' => 'required|max:191|unique:etudiants,email,' . $etudiant->id,
+            'email' => 'required|max:191|unique:users,email,' . $etudiant->id,
             'date_naissance' => 'required|date',
             'ville_id' => 'required|integer'
         ]);
 
         $user[0]->update([
             'nom' => $request->nom,
-            'adresse' => $request->adresse,
-            'telephone' => $request->telephone,
-            'email' => $request->email,
-            'date_naissance' => $request->date_naissance,
-            'ville_id' => $request->ville_id
+            'email' => $request->email
         ]);
 
         $etudiant->update([
-            'nom' => $request->nom,
             'adresse' => $request->adresse,
             'telephone' => $request->telephone,
-            'email' => $request->email,
             'date_naissance' => $request->date_naissance,
             'ville_id' => $request->ville_id,
         ]);
