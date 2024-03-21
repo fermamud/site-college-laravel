@@ -1,0 +1,26 @@
+html,
+body {
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    min-height: 15vh;
+    & .logo {
+        margin: 1.5rem;
+        width: 20rem;
+    }
+}
+
+main {
+    min-height: 76vh;
+}
+
+@media screen and (max-width: 480px) {
+    .adresse,
+    .telephone,
+    .logo {
+        display: none;
+    }
+}
