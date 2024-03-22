@@ -8,6 +8,7 @@
         <div class="card mb-4">
             <div class="card-header"><h5 class="card-title">Id @lang('article') : {{ $article->id }}</h5></div>
             <div class="card-header"><h5 class="card-title">@lang('User') id : {{ $article->user_id }}</h5></div>
+            <div class="card-header"><h5 class="card-title">@lang('User') Name : {{ $article->user->nom }}</h5></div>
             <div class="card-body">
             @php
                 $locale = session('locale');
@@ -21,8 +22,8 @@
                 @if(Auth::user()->id == $article->user_id)
                     <div class="card-footer">
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('article.edit', $article->id) }}" class="btn btn-sm btn-outline-primary m-2">@lang('Update')</a>
-                            <form action="{{ route('article.delete', $article->id) }}" method="post">
+                            <a href="{{ route('article.edit', $article['id']) }}" class="btn btn-sm btn-outline-primary m-2">@lang('Update')</a>
+                            <form action="{{ route('article.delete', $article['id']) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-sm btn-outline-danger m-2">

@@ -62,24 +62,21 @@
     @endif
   </div>
   <div class="col-5">
-    <label for="ville_id" class="form-label">@lang('City')</label>
-    <select name="ville_id" id="ville_id" class="form-control">
-        <option value="0">Sélectionnez une ville</option>
+    <label for="ville_nom" class="form-label">@lang('City')</label>
+    <select name="ville_id" id="ville_nom" class="form-control">
+        <option>Sélectionnez une ville</option>
         @foreach($villes as $ville)
         <option value="{{ $ville->id }}" {{ old('ville_id') == $ville->id ? 'selected' : '' }}>{{ $ville->nom }}</option>
         @endforeach
-      </select>
-      @if($errors->has('ville_id'))
-          <div class="text-danger mt-2">
-              {{ $errors->first('ville_id') }}
-          </div>
-      @endif
+        @if($errors->has('ville_id'))
+            <div class="text-danger mt-2">
+                {{ $errors->first('ville_id') }}
+            </div>
+        @endif
+    </select>
   </div>
   <div class="col-10">
     <button type="submit" class="btn btn-primary">@lang('Add')</button>
   </div>
-  <!-- @foreach ($errors->all() as $error)
-      <div class="text-danger mt-2">{{ $error }}</div>
-    @endforeach -->
 </form>
 @endsection

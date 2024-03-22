@@ -54,7 +54,7 @@ class EtudiantController extends Controller
             'telephone' => 'required|max:191',
             'email' => 'required|max:191|unique:users,email',
             'date_naissance' => 'required|date',
-            'ville_id' => 'required|integer|nullable',
+            'ville_id' => 'required|not_in:0',
             'password' => 'required|min:6|max:20'
         ]);
     
