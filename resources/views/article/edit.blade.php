@@ -21,7 +21,7 @@
     </div>
     <div class="col-5">
       <label for="article_title_fr" class="form-label">@lang('Title in French')</label>
-      <input type="text" name="article_title_fr" class="form-control" id="article_title_fr" value="{{ $article->article['article_title_fr'] ?? '' }}">
+      <input type="text" name="article_title_fr" class="form-control" id="article_title_fr" value="{{ old('article_title_fr', $article->article['article_title_fr'] ?? '') }}">
     </div>
     <div class="col-5">
       <label for="article_content_en" class="form-label">@lang('Article in English')</label>
@@ -33,7 +33,7 @@
     </div>
     <div class="col-5">
       <label for="date" class="form-label">@lang('Date')</label>
-      <input type="date" name="date" class="form-control" id="date" value="{{ old('date') }}">
+      <input type="date" name="date" class="form-control" id="date" value="{{ old('date', $article->date) }}">
     </div>
     <div class="col-10">
     <button type="submit" class="btn btn-primary">@lang('Update')</button>
