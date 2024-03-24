@@ -11,7 +11,7 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'article'];
+    protected $fillable = ['user_id', 'article', 'date'];
 
     protected $casts = [
         'article' => 'array',

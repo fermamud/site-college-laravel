@@ -53,9 +53,8 @@
   <div class="col-md-5">
     <label for="ville_nom" class="form-label">@lang('City')</label>
     <select name="ville_id" id="ville_nom" class="form-control">
-        <option value="{{ $etudiant->ville_id }}">{{ $etudiant->ville->nom }}</option>
         @foreach($villes as $ville)
-        <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
+        <option value="{{ $ville->id }}" {{ (old('ville_id', $etudiant->ville_id) == $ville->id) ? 'selected' : '' }}>{{ $ville->nom }}</option>
         @endforeach
     </select>
     @if($errors->has('ville_id'))

@@ -74,7 +74,7 @@ class DocumentController extends Controller
         $document->date = $request->date;
         $document->save();
 
-        return redirect()->route('document.index')->with('success', 'Document ajoutée avec succès !');
+        return redirect()->route('document.index')->with(['success_fr' => 'Document ajoutée avec succès !', 'success_en' => 'Document inserted with success !']);
     }
 
     /**
@@ -107,7 +107,11 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        return view('document.edit', compact('document'));
+        if (Auth::user()->id == $document->user_id) {
+            return view('document.edit', compact('document'));
+        } else {
+            return redirect(route('document.index'))->withErrors(['custom_error_fr' => 'Vous n\'êtes pas autorisé à modifier ce document.', 'custom_error_en' => 'You are not authorized to modify this document.']);
+        }
     }
 
     /**
@@ -146,7 +150,7 @@ class DocumentController extends Controller
 
         // $documents = Document::all();
         // return view('document.index', compact('documents'));
-        return redirect()->route('document.index')->with('success', 'Document modifiée avec succès !');
+        return redirect()->route('document.index')->with(['success_fr' => 'Document modifiée avec succès !', 'success_en' => 'Document updated with success !']);
     }
 
     /**
@@ -157,7 +161,11 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        $document->delete();
-        return redirect()->route('document.index')->with('success', 'Document supprimée avec succès !');
+        if (Auth::user()->id == $document->user_id) {
+            $document->delete();
+            return redirect()->route('document.index')->with(['success_fr' => 'Document supprimée avec succès !', 'success_en' => 'Document deleted with success !'] );
+        } else {
+            return redirect()->route('document.index');
+        }
     }
 }

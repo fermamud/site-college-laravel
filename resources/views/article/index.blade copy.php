@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', __('Forum'))
 @section('content')
+
 @php
     $locale = session('locale');
     $error = $errors->first('custom_error_' . ($locale ?? 'en'));
@@ -25,13 +26,14 @@
     <div class="col-md-5 m-3">
         <div class="card mb-4">
             <div class="card-header"><h5 class="card-title">Id @lang('article') : {{ $article->id }}</h5></div>
+            <div class="card-header"><h5 class="card-title">@lang('User') id : {{ $article->user_id }}</h5></div>
             <div class="card-header"><h5 class="card-title">@lang('User') Name : {{ $article->user->nom }}</h5></div>
             <div class="card-body">
             @php
                 $locale = session('locale');
                 $default = 'en';
-                $articleTitle = $article->article['article_title_' . ($locale ?? $default)] ?? "Le système ne possédait que cet article en anglais.\n" . $article->article['article_title_'.$default];
-                $articleContent = $article->article['article_content_' . ($locale ?? $default)] ?? $article->article['article_content_'.$default];
+                $articleTitle = $article->article['article_title_' . ($locale ?? 'en')] ?? 'Le système ne possédait que cet titre en anglais.';
+                $articleContent = $article->article['article_content_' . ($locale ?? 'en')] ?? 'Le système ne possédait que cet article en anglais';
             @endphp
             <p class="card-text">{{ $articleTitle }}</p>
             <p class="card-text">{{ $articleContent }}</p>

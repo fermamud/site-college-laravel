@@ -20,7 +20,7 @@
       @endif
     </div>
     <div class="col-5">@lang('Name of document in french')</label>
-      <input type="text" name="fr" class="form-control" id="fr" value="{{ old('fr', $document->nom['fr']) }}">
+      <input type="text" name="fr" class="form-control" id="fr" value="{{ $document->nom['fr'] ?? '' }}">
       @if($errors->has('fr'))
         <div class="text-danger mt-2">
             {{ $errors->first('fr') }}

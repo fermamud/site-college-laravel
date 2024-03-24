@@ -16,6 +16,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
+        //return view('article.index', ['articles' => $articles]);
         return view('article.index', compact('articles'));
     }
 
@@ -41,8 +42,7 @@ class ArticleController extends Controller
             'article_title_en' => 'required|max:100',
             'article_title_fr' => 'nullable|max:100',
             'article_content_en' => 'required|string',
-            'article_content_fr' => 'nullable|string',
-            'date' => 'required|date',
+            'article_content_fr' => 'nullable|string'
         ]);
 
         $article = [
@@ -59,11 +59,9 @@ class ArticleController extends Controller
         $newArticle = new Article();
         $newArticle->user_id = Auth::user()->id;
         $newArticle->article = $article;
-        $newArticle->date = $request->date;
         $newArticle->save();
 
-        //return redirect(route('article.index'))->withSuccess('Ajout de l\'article réussi !');
-        return redirect(route('article.index'))->with(['success_fr' => 'Ajout de l\'article réussi !', 'success_en' => 'Article inserted with success !']);
+        return redirect(route('article.index'))->withSuccess('Ajout de l\'article réussi !');
     }
 
     /**
@@ -85,6 +83,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        // return $article;
         if (Auth::user()->id == $article->user_id) {
             return view('article.edit', ['article' => $article]);
         } else {
@@ -106,8 +105,7 @@ class ArticleController extends Controller
             'article_title_en' => 'required|max:100',
             'article_title_fr' => 'nullable|max:100',
             'article_content_en' => 'required|string',
-            'article_content_fr' => 'nullable|string',
-            'date' => 'required|date',
+            'article_content_fr' => 'nullable|string'
         ]);
 
         $updateArticle = [
@@ -121,20 +119,15 @@ class ArticleController extends Controller
                             'article_content_fr' => $request->article_content_fr];
         };
 
-        $date = $request->date;
-
         $article->update([
             'user_id' => Auth::user()->id,
-            'article' => $updateArticle,
-            'date' => $date
+            'article' => $updateArticle
         ]);
+        //$updatedArticle->user_id = Auth::user()->id;
+        //$updatedArticle->article = $article;
+        //$updatedArticle->save();
 
-        $successMessage = [
-            'fr' => 'Modification de l\'article réussi !',
-            'en' => 'Article updated successfully!'
-        ];
-
-        return redirect(route('article.index'))->with(['success_fr' => 'Modification de l\'article réussi !', 'success_en' => 'Article updated with success !']);
+        return redirect(route('article.index'))->withSuccess('Modification de l\'article réussi !');
     }
 
     /**
@@ -145,11 +138,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        if (Auth::user()->id == $article->user_id) {
-            $article->delete();
-            return redirect()->route('article.index')->with(['success_fr' => 'Suppression de l\'article réussi !', 'success_en' => 'Article deleted with success !']);
-        } else {
-            return redirect(route('article.index'));
-        }
+        $article->delete();
+        return redirect()->route('article.index')->with('success', 'Tâche supprimée avec succès !');
     }
 }

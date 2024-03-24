@@ -24,7 +24,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" class="form-control">
+                            <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>

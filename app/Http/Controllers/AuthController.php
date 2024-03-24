@@ -39,7 +39,6 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users',
             'password' => 'required'
-            //'password' => 'requiredmin:6|max:20'
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -52,7 +51,7 @@ class AuthController extends Controller
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
         Auth::login($user);
-        return redirect()->intended(route('etudiant.index'))->withSuccess('Signed in');
+        return redirect()->intended(route('article.index'))->withSuccess('Signed in');
     }
 
 

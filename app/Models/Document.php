@@ -14,4 +14,8 @@ class Document extends Model
     protected $casts = [
         'nom' => 'array',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

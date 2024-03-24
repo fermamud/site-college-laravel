@@ -31,7 +31,8 @@
         <input type="text" name="article_content_fr" class="form-control" id="article_content_fr" value="{{ old('article_content_fr') }}">
       </div>
       <div class="col-5">
-        <input type="hidden" name="user_id" class="form-control" value="1">
+        <label for="date" class="form-label">@lang('Date')</label>
+        <input type="date" name="date" class="form-control" id="date" value="{{ old('date') }}">
       </div>
       <div class="col-10">
       <button type="submit" class="btn btn-primary">@lang('Add')</button>

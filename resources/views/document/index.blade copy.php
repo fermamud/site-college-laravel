@@ -25,11 +25,11 @@
         <thead>
             <tr>
                 <th scope="col">@lang('Name')</th>
-                <th scope="col">@lang('User')</th>
                 <th scope="col">@lang('Date')</th>
                 <th scope="col">@lang('Download')</th>
                 <th scope="col">@lang('Modification')</th>
                 <th scope="col">@lang('Delete')</th>
+
             </tr>
         </thead>
         <tbody>
@@ -42,7 +42,6 @@
             @if($documentTitle !== null)
             <tr>
                 <td>{{ $documentTitle }}</td>
-                <td>{{ $document->user->nom }}</td>
                 <td>{{ $document->date }}</td>
                 <td>
                     <a href="{{ route('document.download', $document->document) }}">
