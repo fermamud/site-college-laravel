@@ -37,6 +37,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation
         $request->validate([
             'article_title_en' => 'required|max:100',
             'article_title_fr' => 'nullable|max:100',
@@ -50,6 +51,7 @@ class ArticleController extends Controller
             'article_content_en' => $request->article_content_en,
         ];
 
+        // Add title and content in english par default and if french was included, it will be inserted as well
         if($request->article_title_fr != null && $request->article_content_fr != null) {
             $article = $article
                         + ['article_title_fr' => $request->article_title_fr,
@@ -62,7 +64,6 @@ class ArticleController extends Controller
         $newArticle->date = $request->date;
         $newArticle->save();
 
-        //return redirect(route('article.index'))->withSuccess('Ajout de l\'article réussi !');
         return redirect(route('article.index'))->with(['success_fr' => 'Ajout de l\'article réussi !', 'success_en' => 'Article inserted with success !']);
     }
 
@@ -85,6 +86,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        // If you are not the owner of the article, you won't be able to modify it
         if (Auth::user()->id == $article->user_id) {
             return view('article.edit', ['article' => $article]);
         } else {
@@ -145,6 +147,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        // If you are not the owner of the article, you won't be able to delete it
         if (Auth::user()->id == $article->user_id) {
             $article->delete();
             return redirect()->route('article.index')->with(['success_fr' => 'Suppression de l\'article réussi !', 'success_en' => 'Article deleted with success !']);

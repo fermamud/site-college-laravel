@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', __('Modify document'))
 @section('content')
-<!-- incluir erros -->
 <h1 class="my-5 text-center">@lang('Modify document')</h1>
 <form class="row g-3 m-5 justify-content-center" method="POST" enctype="multipart/form-data">
     @csrf

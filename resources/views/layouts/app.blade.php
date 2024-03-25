@@ -24,29 +24,32 @@
             @auth
                 <a class="flex-sm-fill text-sm-center nav-link {{ request()->routeIs('article.index') ? 'active' : '' }}" href="{{ route('article.index') }}">@lang('Forum')</a>
                 <a class="flex-sm-fill text-sm-center nav-link {{ request()->routeIs('document.index') ? 'active' : '' }}" href="{{ route('document.index') }}">@lang('Documents')</a>
-            @endauth
-            @guest
+                @endauth
+                @guest
                 <a class="flex-sm-fill text-sm-center nav-link {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">@lang('Login')</a>
-            @else
+                @else
                 <a class="flex-sm-fill text-sm-center nav-link {{ request()->routeIs('logout') ? 'active' : '' }}" href="{{ route('logout') }}">@lang('Logout')</a>
-            @endguest
-            <ul class="navbar-nav mb-2 mb-sm-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                @endguest
+                <ul class="navbar-nav mb-2 mb-sm-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
                         aria-expanded="false">@lang('Language') {{ $locale == '' ? "(en)" : "($locale)"}}</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('lang', 'en') }}">@lang('English')</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lang', 'fr') }}">@lang('French')</a></li>
-                    </ul>
-                </li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('lang', 'en') }}">@lang('English')</a></li>
+                            <li><a class="dropdown-item" href="{{ route('lang', 'fr') }}">@lang('French')</a></li>
+                        </ul>
+                    </li>
             </ul>
         </nav>
     </header>
     <main>
+        @auth
+            <p class="text-uppercase fw-bold my-2 m-5 welcome">@lang('Welcome'), {{ Auth::user()->nom }}</p>
+        @endauth
         @if(session('success'))
-            <div class="alert alert-success alert-dismissable fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-lable="Close"></button>
+        <div class="alert alert-success alert-dismissable fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-lable="Close"></button>
             </div>
         @endif
         @yield('content')

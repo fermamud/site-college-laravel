@@ -78,8 +78,5 @@
   <div class="col-10">
     <button type="submit" class="btn btn-primary">@lang('Add')</button>
   </div>
-  <!-- @foreach ($errors->all() as $error)
-      <div class="text-danger mt-2">{{ $error }}</div>
-    @endforeach -->
 </form>
 @endsection

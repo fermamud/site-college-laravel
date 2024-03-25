@@ -16,9 +16,6 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        // $documents = Document::all();
-        // return view('document.index', compact('documents'));
-
         $documents = Document::select()
                     ->orderBy('nom')
                     ->paginate(5);
@@ -60,7 +57,6 @@ class DocumentController extends Controller
         if($request->fr != null) {
             $nom = $nom + ['fr' => $request->fr];
         }
-        //return $request;
         
         $document = new Document();
 
@@ -90,7 +86,6 @@ class DocumentController extends Controller
 
     /**
      * Upload file
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -143,13 +138,12 @@ class DocumentController extends Controller
         $request->document->move('assets', $filename);
         $document->document = $filename;
 
+        // If you are not the owner of the document, you won't be able to modify it
         $document->update([
             'nom' => $nom,
             'date' => $request->date,
         ]);
 
-        // $documents = Document::all();
-        // return view('document.index', compact('documents'));
         return redirect()->route('document.index')->with(['success_fr' => 'Document modifiée avec succès !', 'success_en' => 'Document updated with success !']);
     }
 
@@ -161,6 +155,7 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
+        // If you are not the owner of the document, you won't be able to delete it
         if (Auth::user()->id == $document->user_id) {
             $document->delete();
             return redirect()->route('document.index')->with(['success_fr' => 'Document supprimée avec succès !', 'success_en' => 'Document deleted with success !'] );

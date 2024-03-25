@@ -19,7 +19,6 @@ class UserController extends Controller
         $users = User::select('id', 'nom', 'email')
                         ->orderBy('nom')
                         ->get();
-                        //->paginate(5);
         return view('user.index', compact('users'));
     }
 
@@ -30,11 +29,8 @@ class UserController extends Controller
      */
     public function create($id)
     {   
-        // $etudiant = Etudiant::findOrFail($id);
         $user = User::find($id);
-        // return $user;
         return view('user.create', compact('user'));
-        //return view('user.create');
     }
 
     /**
@@ -50,7 +46,6 @@ class UserController extends Controller
         ]);
 
         $user = new User;
-        // $user->fill($request->password);
         $user->password = Hash::make($request->password);
         $user->save();
         return redirect(route('user.index'))->withSuccess('User created successfully !');

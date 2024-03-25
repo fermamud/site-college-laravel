@@ -19,9 +19,6 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        // $etudiants = Etudiant::all();
-        // return view('etudiant.index', ['etudiants' => $etudiants]);
-
         $etudiants = Etudiant::select()
                     ->orderBy('id')
                     ->paginate(50);
@@ -47,7 +44,6 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $request->validate([
             'nom' => 'required|max:191',
             'adresse' => 'required|string',

@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('content')
 
-    @if(!$errors->isEmpty())
+@if(!$errors->isEmpty())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <ul>
             @foreach($errors->all() as $error)
@@ -11,7 +11,7 @@
         </ul>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    @endif
+@endif
     <h1 class="my-5 text-center">Login</h1>
     <div class="row justify-content-center">
         <div class="col-md-4">

@@ -23,6 +23,7 @@ use App\Http\Controllers\DocumentController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/etudiants', [EtudiantController::class, 'index'])->name('etudiant.index');
 Route::get('/etudiant/{etudiant}', [EtudiantController::class, 'show'])->name('etudiant.show');
 Route::get('/create/etudiant', [EtudiantController::class, 'create'])->name('etudiant.create');
@@ -34,7 +35,6 @@ Route::delete('/etudiant/{etudiant}', [EtudiantController::class, 'destroy'])->n
 Route::get('/users', [UserController::class, 'index'])->name('user.index');
 Route::get('/registration/{etudiant}', [UserController::class, 'create'])->name('user.create');
 Route::post('/registration/{etudiant}', [UserController::class, 'store'])->name('user.store');
-// Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
 
 Route::get('/login', [AuthController::class, 'create'])->name('login');
 Route::post('/login', [AuthController::class, 'store'])->name('login.store');

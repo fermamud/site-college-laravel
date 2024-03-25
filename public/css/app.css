@@ -17,8 +17,12 @@ header {
     }
 }
 
+.welcome {
+    color: blue;
+    font-size: 1.2rem;
+}
+
 main {
-    /* min-height: calc(100vh - 15vh - 95px); */
     min-height: 82%;
 }
 
